@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 export default function useScrollHook() {
 
     const [scroll, changeScroll] = useState(0)
+    const [direction, changeDirection] = useState('bottom')
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -19,8 +20,10 @@ export default function useScrollHook() {
                 if (event.wheelDeltaY < 0 && el + 1 > maxScroll) {
                     return maxScroll
                 } else if (event.wheelDeltaY < 0) {
+                    changeDirection('bottom')
                     return el + 1
                 } else if (el - 1 >= 0) {
+                    changeDirection('top')
                     return el - 1
                 } else {
                     return 0
@@ -29,5 +32,5 @@ export default function useScrollHook() {
         }, false)
     }, [])
 
-    return scroll
+    return { scroll, direction }
 }

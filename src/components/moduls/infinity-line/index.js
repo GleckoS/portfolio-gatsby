@@ -1,20 +1,48 @@
 import gsap from "gsap"
-import React, { useEffect } from "react"
-import styled, {keyframes} from "styled-components"
+import React, { useEffect, useRef, useState } from "react"
+import styled, { keyframes } from "styled-components"
 
 export default function ({ children }) {
 
+    const $item = useRef()
+
+    const [direction, changeDirection] = useState('left')
+
+    const startAnimation = () => {
+        gsap.killTweensOf('.title')
+        gsap.to(".title",
+            {
+                duration: 12,
+                ease: "none",
+                xPercent: "-100",
+                repeat: -1
+            }
+        );
+    }
+
     useEffect(() => {
-        // gsap.to('#line')
+        document.addEventListener('wheel', (event) => {
+            if (event.wheelDeltaY < 0) {
+                changeDirection('left')
+            } else {
+                changeDirection('right')
+            }
+        }, false)
+
+        startAnimation()
     }, [])
 
+    useEffect(() => {
+        // startAnimation()
+    }, [direction])
+
     return (
-        <Wrapper id='line'>
-            <h1 id="main-title">
+        <Wrapper ref={$item} data-scroll="" data-scroll-direction="horizontal" data-scroll-speed="4" data-scroll-position="top">
+            <h1 className="title">
                 {children}
                 <span> –</span>
             </h1>
-            <h1 id="copy-title">
+            <h1 className="title">
                 {children}
                 <span> –</span>
             </h1>
@@ -22,35 +50,16 @@ export default function ({ children }) {
     )
 }
 
-const StrokeLeft = keyframes`
-    0%{
-        transform: translate3d(0, 0, 0);
-    }
-
-    100%{
-        transform: translate3d(-50%, 0, 0);
-    }
-`
-
-// const StrokeRight = keyframes`
-//     0%{
-//         transform: translate3d(0, 0, 0);
-//     }
-
-//     100%{
-//         transform: translate3d(-50%, 0, 0);
-//     }
-// `
-
 const Wrapper = styled.div`
-    width: 200%;
+    padding-top: 600px;
+    width: max-content;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    animation: ${StrokeLeft} 8s linear infinite;
 
     h1{
         font-family: sans-serif;
-        font-size: 9vw;
+        font-size: 12vw;
+        font-weight: 400;
         color: #fff;
         text-size-adjust: none;
     }

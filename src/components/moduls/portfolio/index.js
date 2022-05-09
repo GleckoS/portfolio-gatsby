@@ -21,9 +21,7 @@ export default function Portfolio({ children }) {
         gsap.killTweensOf($item.current)
         gsap.killTweensOf($root.current)
         gsap.killTweensOf($button.current)
-        gsap.to($item.current, { scale: 1, duration: speed })
-        gsap.to($button.current, { scale: 1, duration: speed })
-
+        
         rootBound.current = $root.current.getBoundingClientRect()
 
         const itemX = e.clientX - rootBound.current.left - (itemBound.x / 2)
@@ -39,6 +37,9 @@ export default function Portfolio({ children }) {
             x: buttonX,
             y: buttonY
         })
+
+        gsap.to($item.current, { scale: 1, duration: speed, ease: 'power4.out', })
+        gsap.to($button.current, { scale: 1, duration: speed, ease: 'power4.out', })
     }
 
     const handleMouseLeave = (e) => {
@@ -221,12 +222,18 @@ const portfolioItems = [
         name: 'Akademia Pana Królika',
         work: 'Development',
         preview: 'https://www.datocms-assets.com/62818/1649737941-animacje-dla-dzieci-akademia-pana-krolika.jpg?w=1000&fit=max&fm=jpg',
-        color: 'pink'
+        color: 'rgb(219, 39, 119)'
+    },
+    {
+        name: 'Decontex',
+        work: 'Development',
+        preview: 'https://www.datocms-assets.com/62523/1643777837-decontex-polska.jpg?auto=format',
+        color: 'rgb(81, 184, 235)'
     },
     {
         name: 'Cargem',
         work: 'Development',
         preview: 'https://www.datocms-assets.com/61582/1647062057-cargem-warsztat-samochodowy.jpg?w=1000&fit=max&fm=jpg',
-        color: 'grey'
+        color: 'rgb(44, 140, 218)'
     },
 ]

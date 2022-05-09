@@ -3,21 +3,21 @@ import styled from "styled-components"
 import { Container } from "../../../styles/styled";
 import MagneticButton from "../../moduls/button";
 import Portfolio from "../../moduls/portfolio";
-import Text from "../../moduls/text";
+import Text from "../../moduls/divided-text";
 
-export default function About({ translate }) {
+export default function About() {
     return (
-        <Wrapper translate={translate}>
+        <Wrapper  data-scroll-section>
             <Container>
                 <Flex>
-                    <Text>
+                    <Text data-scroll data-scroll-speed="1">
                         Helping brands to stand out in the digital era.
                         Together we will set the new status quo.
                         No nonsense, always on the cutting edge.
                     </Text>
                     <SubText>
-                        <p>The combination of my passion for design, code & interaction positions me in a unique place in the web design world.</p>
-                        <ButtonWrapper translate={translate}>
+                        <p data-scroll>The combination of my passion for design, code & interaction positions me in a unique place in the web design world.</p>
+                        <ButtonWrapper data-scroll data-scroll-speed="2">
                             <MagneticButton>
                                 About Me
                             </MagneticButton>
@@ -32,8 +32,6 @@ export default function About({ translate }) {
 
 const Wrapper = styled.section`
     min-height: 100vh;
-    transition: transform .8s cubic-bezier(0.215, 0.610, 0.355, 1);
-    transform: translate3d(0, ${props => props.translate * -120}px, 0);
     box-sizing: border-box;
     padding-top: 160px;
 `;
@@ -58,6 +56,4 @@ const SubText = styled.div`
 `
 
 const ButtonWrapper = styled.div`
-    transition: transform .6s cubic-bezier(0.215, 0.610, 0.355, 1);
-    transform: translate3d(0, ${props => (props.translate * -20) + 180}px, 0);
 `

@@ -1,10 +1,16 @@
 import React from "react"
 import styled from "styled-components"
+import InfinityLine from "../../moduls/infinity-line"
 
-export default function Hero({ children, translate }) {
+export default function Hero() {
     return (
-        <Wrapper translate={translate}>
-            {children}
+        <Wrapper data-scroll-section>
+            <Image>
+                <img src="https://dennissnellenberg.com/assets/img/DSC07033.jpg"/>
+            </Image>
+            <InfinityLine >
+                Bohdan Shevhcenko
+            </InfinityLine>
         </Wrapper>
     )
 }
@@ -12,6 +18,22 @@ export default function Hero({ children, translate }) {
 const Wrapper = styled.section`
     background-color: #999D9E;
     min-height: 100vh;
-    transition: transform .8s cubic-bezier(0.215, 0.610, 0.355, 1);
-    transform: translate3d(0, ${props => props.translate * -120}px, 0);
+    overflow: hidden;
+    position: relative;
+`
+
+const Image = styled.div`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    img{
+        position: absolute;
+        bottom: 0;
+        top: -10vh;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 120vh;
+    }
 `

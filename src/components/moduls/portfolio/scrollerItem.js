@@ -16,7 +16,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     background-color: ${props => props.color};
-    transition: transform .5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    transition: transform .5s cubic-bezier(0.77, 0, 0.375, 1);
     transform: translateY(${props => -100 * props.move}%);
     img{
         max-width: 90%;
