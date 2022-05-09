@@ -9,68 +9,87 @@ export default function Portfolio({ children }) {
 
     const $root = useRef()
     const $item = useRef()
+    const $button = useRef()
+    const $buttonText = useRef()
     const rootBound = useRef()
 
     const itemBound = { x: 400, y: 400 }
+    const buttonBound = { x: 80, y: 80 }
     const speed = 0.5
 
     const handleMouseEnter = (e) => {
         gsap.killTweensOf($item.current)
         gsap.killTweensOf($root.current)
+        gsap.killTweensOf($button.current)
         gsap.to($item.current, { scale: 1, duration: speed })
+        gsap.to($button.current, { scale: 1, duration: speed })
 
         rootBound.current = $root.current.getBoundingClientRect()
 
-        const newX = e.clientX - rootBound.current.left - (itemBound.x / 2)
-        const newY = e.clientY - rootBound.current.top - (itemBound.y / 2)
+        const itemX = e.clientX - rootBound.current.left - (itemBound.x / 2)
+        const itemY = e.clientY - rootBound.current.top - (itemBound.y / 2)
+        const buttonX = e.clientX - rootBound.current.left - (buttonBound.x / 2)
+        const buttonY = e.clientY - rootBound.current.top - (buttonBound.y / 2)
 
         gsap.set($item.current, {
-            x: newX,
-            y: newY
+            x: itemX,
+            y: itemY
+        })
+        gsap.set($button.current, {
+            x: buttonX,
+            y: buttonY
         })
     }
 
     const handleMouseLeave = (e) => {
-        const newX = e.clientX - rootBound.current.left - (itemBound.x / 2)
-        const newY = e.clientY - rootBound.current.top - (itemBound.y / 2)
+        const itemX = e.clientX - rootBound.current.left - (itemBound.x / 2)
+        const itemY = e.clientY - rootBound.current.top - (itemBound.y / 2)
+        const buttonX = e.clientX - rootBound.current.left - (buttonBound.x / 2)
+        const buttonY = e.clientY - rootBound.current.top - (buttonBound.y / 2)
 
         gsap.killTweensOf($item.current)
         gsap.killTweensOf($root.current)
+        gsap.killTweensOf($button.current)
         gsap.to($item.current, {
-            x: newX,
-            y: newY,
-            ease: 'expo',
+            x: itemX,
+            y: itemY,
+            ease: 'power4.out',
             scale: 1,
             scale: 0,
-            duration: 1.2
+            duration: .6
+        })
+        gsap.to($button.current, {
+            x: buttonX,
+            y: buttonY,
+            ease: 'power4.out',
+            scale: 1,
+            scale: 0,
+            duration: .6
         })
     }
 
     const handleMouseMove = (e) => {
-        const newX = e.clientX - rootBound.current.left - (itemBound.x / 2)
-        const newY = e.clientY - rootBound.current.top - (itemBound.y / 2)
+        const itemX = e.clientX - rootBound.current.left - (itemBound.x / 2)
+        const itemY = e.clientY - rootBound.current.top - (itemBound.y / 2)
+        const buttonX = e.clientX - rootBound.current.left - (buttonBound.x / 2)
+        const buttonY = e.clientY - rootBound.current.top - (buttonBound.y / 2)
 
-        let isTopOut = newY < (-itemBound.y / 2)
-        let isBottomOut = newY > rootBound.current.height - itemBound.y / 2
 
-        if (isTopOut || isBottomOut) {
-            gsap.to($item.current, {
-                x: newX,
-                y: newY,
-                ease: 'expo',
-                scale: 1,
-                scale: 0,
-                duration: 1.2
-            })
-        } else {
-            gsap.to($item.current, {
-                x: newX,
-                y: newY,
-                ease: 'power3.out',
-                scale: 1,
-                duration: 1.2
-            })
-        }
+        gsap.to($item.current, {
+            x: itemX,
+            y: itemY,
+            ease: 'power2.out',
+            scale: 1,
+            duration: 1
+        })
+
+        gsap.to($button.current, {
+            x: buttonX,
+            y: buttonY,
+            ease: 'power3.out',
+            scale: 1,
+            duration: 1
+        })
     }
 
     const childHandleMouseEnter = (e) => {
@@ -96,6 +115,9 @@ export default function Portfolio({ children }) {
                         <p>{el.work}</p>
                     </Item>
                 ))}
+                <ScrollButton ref={$button}>
+                    <ScrollText ref={$buttonText}>View</ScrollText>
+                </ScrollButton>
                 <ScrollerWrapper ref={$item}>
                     {portfolioItems.map(el => (
                         <ScrollerItem currentItem={currentItem} el={el} />
@@ -122,12 +144,37 @@ const ScrollerWrapper = styled.div`
     transform: scale(0);
     z-index: 100;
     position: absolute;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 400px;
     height: 400px;
     overflow: hidden;
     pointer-events: none;
+`
+
+const ScrollButton = styled.div`
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: blue;
+    pointer-events: none;
+    transform: scale(0);
+`
+
+const ScrollText = styled.p`
+    z-index: 3;
+    color: white;
+    pointer-events: none;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 const ItemList = styled.div`

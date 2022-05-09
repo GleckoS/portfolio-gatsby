@@ -1,10 +1,6 @@
 import * as React from "react"
-import MagneticButton from "../components/button"
 import Hero from "../components/sections/hero"
-import InfinityLine from "../components/infinity-line"
-import Portfolio from "../components/portfolio"
 import About from "../components/sections/about"
-import Text from "../components/text"
 import useScrollHook from "../hooks/scrollHook"
 
 const IndexPage = () => {
@@ -13,17 +9,11 @@ const IndexPage = () => {
   return (
     <main id="main">
       <Hero translate={scroll}>
-        <InfinityLine>
+        {/* <InfinityLine>
           Bohdan Shevhcenko
-        </InfinityLine>
-        {/* <Text>
-          
-        </Text>
-        <MagneticButton>About Me</MagneticButton> */}
+        </InfinityLine> */}
       </Hero>
-      <About translate={scroll}>
-        <Portfolio/>
-      </About>
+      <About translate={scroll}/>
     </main>
   )
 }

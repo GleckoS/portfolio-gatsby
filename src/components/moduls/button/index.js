@@ -10,8 +10,7 @@ export default function MagneticButton({
     tollerance = 0.3,
     scale = 1.2,
     debug = false,
-    borderRadius = '50%',
-    ...props
+    borderRadius = '50%'
 }) {
     const $root = useRef()
     const $item = useRef()
@@ -118,7 +117,6 @@ export default function MagneticButton({
             onClick={() => {
                 console.log('click')
             }}
-            {...props}
         >
             <span ref={$item} className="magnetic-button--item">
                 {children}
@@ -138,15 +136,16 @@ const StyledButton = styled.button`
     color: white;
     border-radius: 50%;
     border: none;
-    width: 144px;
-    height: 144px;
+    width: 200px;
+    height: 200px;
     overflow: hidden;
-    background-color: darkgrey;
+    background-color: #1C1D20;
     
     span {
         display: inline-block;
         position: relative;
         z-index: 3;
+        font-size: 19px;
     }
 
     .magnetic-button--hover{

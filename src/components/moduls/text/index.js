@@ -5,22 +5,13 @@ import styled from "styled-components"
 export default function Text({ children }) {
     const elements = children.split(' ')
 
-    const startAnimation = () => {
-        document.getElementById('paragraph').classList.add('active')
-    }
-    const closeAnimation = () => {
-        document.getElementById('paragraph').classList.remove('active')
-    }
+    const { ref, inView, entry } = useInView({threshold: 0.2})
 
-    const { ref, inView, entry } = useInView({threshold: 0.5})
-    console.log(inView)
     return (
         <Paragraph id="paragraph" ref={ref}>
             {elements.map((el, index) => (
                 <Word inView={inView} index={index + 10}><span>{el} </span></Word>
             ))}
-
-
         </Paragraph>
     )
 }

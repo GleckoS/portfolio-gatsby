@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components"
 import { Container } from "../../../styles/styled";
-import MagneticButton from "../../button";
-import Portfolio from "../../portfolio";
-import Text from "../../text";
+import MagneticButton from "../../moduls/button";
+import Portfolio from "../../moduls/portfolio";
+import Text from "../../moduls/text";
 
 export default function About({ translate }) {
     return (
@@ -17,9 +17,11 @@ export default function About({ translate }) {
                     </Text>
                     <SubText>
                         <p>The combination of my passion for design, code & interaction positions me in a unique place in the web design world.</p>
-                        <MagneticButton>
-                            About Me
-                        </MagneticButton>
+                        <ButtonWrapper translate={translate}>
+                            <MagneticButton>
+                                About Me
+                            </MagneticButton>
+                        </ButtonWrapper>
                     </SubText>
                 </Flex>
                 <Portfolio />
@@ -53,4 +55,9 @@ const SubText = styled.div`
         line-height: 1.66;
         margin-bottom: 3rem;
     }
+`
+
+const ButtonWrapper = styled.div`
+    transition: transform .6s cubic-bezier(0.215, 0.610, 0.355, 1);
+    transform: translate3d(0, ${props => (props.translate * -20) + 180}px, 0);
 `
