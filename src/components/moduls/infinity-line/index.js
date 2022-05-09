@@ -37,15 +37,15 @@ export default function ({ children }) {
     }, [direction])
 
     return (
-        <Wrapper ref={$item} data-scroll="" data-scroll-direction="horizontal" data-scroll-speed="4" data-scroll-position="top">
-            <h1 className="title">
+        <Wrapper ref={$item} data-scroll data-scroll-direction="horizontal" data-scroll-speed="4" data-scroll-position="top">
+            <h2 className="title">
                 {children}
                 <span> –</span>
-            </h1>
-            <h1 className="title">
+            </h2>
+            <h2 className="title">
                 {children}
                 <span> –</span>
-            </h1>
+            </h2>
         </Wrapper>
     )
 }
@@ -55,8 +55,10 @@ const Wrapper = styled.div`
     width: max-content;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    position: absolute;
+    bottom: 5%;
 
-    h1{
+    h2{
         font-family: sans-serif;
         font-size: 12vw;
         font-weight: 400;

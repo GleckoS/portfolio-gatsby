@@ -5,4 +5,5 @@ export const Container = styled.div`
     max-width: 1920px;
     box-sizing: border-box;
     margin: 0 auto;
+    width: 100%;
 `;

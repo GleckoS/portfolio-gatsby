@@ -1,5 +1,5 @@
 import gsap from "gsap"
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import ScrollerItem from "./scrollerItem"
 
